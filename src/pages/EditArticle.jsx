@@ -27,8 +27,7 @@ const EditArticle = () => {
     const fetchArticle = async () => {
       try {
         setFetchLoading(true);
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/magazine/article/${id}`);
-        const article = response.data.data || response.data;
+
 
         setOriginalData(article);
         setFormData({

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { MoreVertical, AlertCircle } from 'lucide-react';
+import { MoreVertical, AlertCircle, Clock } from 'lucide-react';
 
-const ArticleCard = ({ 
-  article, 
-  onUpdate, 
-  onDelete, 
+const ArticleCard = ({
+  article,
+  onUpdate,
+  onDelete,
   onClick,
-  showAdminActions = false 
+  showAdminActions = false
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -62,7 +62,7 @@ const ArticleCard = ({
       )}
 
       {/* Article Card */}
-      <div 
+      <div
         onClick={handleCardClick}
         className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer group border border-pink-50"
       >
@@ -77,7 +77,7 @@ const ArticleCard = ({
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-          
+
           {/* Admin Actions - Three Dots Menu */}
           {showAdminActions && (
             <div className="admin-actions absolute top-4 right-4">
@@ -91,12 +91,12 @@ const ArticleCard = ({
                 >
                   <MoreVertical size={16} />
                 </button>
-                
+
                 {/* Dropdown Menu */}
                 {showDropdown && (
                   <>
-                    <div 
-                      className="fixed inset-0 z-10" 
+                    <div
+                      className="fixed inset-0 z-10"
                       onClick={() => setShowDropdown(false)}
                     ></div>
                     <div className="absolute right-0 top-12 bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-[140px] z-20">
@@ -153,22 +153,25 @@ const ArticleCard = ({
           <h3 className="text-xl font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
             {article.title}
           </h3>
-          
+
           {/* Subtitle */}
           {article.subTitle && (
             <p className="text-gray-600 line-clamp-2 leading-relaxed mb-4">
               {article.subTitle}
             </p>
           )}
-          
+
           {/* Category */}
           <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
             <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium capitalize">
               {article.category}
             </span>
-            <span>{new Date(article.createdAt).toLocaleDateString()}</span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-4 h-4 text-gray-400" />
+              {new Date(article.createdAt).toLocaleDateString()}
+            </span>
           </div>
-          
+
           {/* Author Info */}
           <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
             <img

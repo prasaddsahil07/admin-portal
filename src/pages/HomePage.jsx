@@ -14,7 +14,7 @@ const HomePage = () => {
         </p>
 
         {/* Vector Illustration */}
-        <div className="mt-10 flex justify-center h-60">
+        <div className="mt-10 flex justify-center h-58">
           <img
             src="undraw_book-lover_f1dq.png" // replace with your preferred women-centric vector
             alt="Empowered Women Illustration"
