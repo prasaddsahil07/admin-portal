@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, FileText, Tag, User, Image, Upload, X } from 'lucide-react';
+import axios from 'axios';
 
 const CreateArticle = () => {
   const [formData, setFormData] = useState({
@@ -100,7 +101,7 @@ const CreateArticle = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Clear previous messages
     setMessage('');
 
@@ -128,10 +129,18 @@ const CreateArticle = () => {
 
     try {
       setLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setMessage('Article created successfully!');
+
+      const response = await axios.put(
+        `${import.meta.env.VITE_BASE_URL}/magazine/addArticle`,
+        payload,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      setMessage(response.msg || 'Article created successfully!');
 
       // Reset form
       setFormData({
@@ -202,7 +211,7 @@ const CreateArticle = () => {
                 }}
               />
             </div>
-            
+
             <button
               type="button"
               onClick={() => removeFile(fieldName)}
@@ -241,7 +250,7 @@ const CreateArticle = () => {
         {/* Compact Form */}
         <div className="bg-white rounded-xl shadow-lg border border-pink-100">
           <div className="p-6 space-y-6">
-            
+
             {/* Author Section - Horizontal */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="md:col-span-2">
