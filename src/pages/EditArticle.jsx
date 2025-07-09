@@ -27,21 +27,29 @@ const EditArticle = () => {
     const fetchArticle = async () => {
       try {
         setFetchLoading(true);
-
-
-        setOriginalData(article);
+        
+        // Add the actual API call here
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/magazine/article/${id}`
+        );
+        
+        const article = response.data; // or response.data.article, depending on your API response structure
+        // console.log(article.data);
+        setOriginalData(article.data);
+        // console.log(originalData);
+        
         setFormData({
-          category: article.category || '',
-          title: article.title || '',
-          content: article.content || '',
-          subTitle: article.subTitle || '',
+          category: article.data.category || '',
+          title: article.data.title || '',
+          content: article.data.content || '',
+          subTitle: article.data.subTitle || '',
           bannerImage: null,
-          tags: Array.isArray(article.tags) ? article.tags.join(', ') : '',
+          tags: Array.isArray(article.data.tags) ? article.data.tags.join(', ') : '',
         });
 
         // Set existing banner image preview
-        if (article.bannerImage) {
-          setBannerPreview(article.bannerImage);
+        if (article.data.bannerImage) {
+          setBannerPreview(article.data.bannerImage);
         }
       } catch (error) {
         console.error('Error fetching article:', error);
@@ -121,12 +129,13 @@ const EditArticle = () => {
         }
       );
 
-      setMessage(response.data?.msg || 'Article updated successfully!');
-
+      setMessage(response.data.msg || 'Article updated successfully!');
+      // console.log(response);
+      
       // Navigate back after a short delay
-      setTimeout(() => {
-        navigate('/admin/articles'); // Adjust this path as needed
-      }, 2000);
+      if(response.status === 200){
+        navigate(`/article/${id}`)
+      }
 
     } catch (err) {
       console.error(err);
@@ -258,7 +267,7 @@ const EditArticle = () => {
             <h2 className="text-xl font-semibold text-white">Edit Article Details</h2>
           </div>
 
-          <div onSubmit={handleSubmit} className="p-8 space-y-8">
+          <form onSubmit={handleSubmit} className="p-8 space-y-8">
             {/* Article Info */}
             <div className="grid md:grid-cols-2 gap-6">
               <div>
@@ -357,7 +366,7 @@ const EditArticle = () => {
               </button>
 
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={loading}
                 className="px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-rose-600 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
               >
@@ -374,7 +383,7 @@ const EditArticle = () => {
                 )}
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
