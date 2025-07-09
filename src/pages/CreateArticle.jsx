@@ -130,7 +130,7 @@ const CreateArticle = () => {
     try {
       setLoading(true);
 
-      const response = await axios.put(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/magazine/addArticle`,
         payload,
         {
