@@ -827,27 +827,49 @@ const CreateArticle = () => {
                       plugins: [
                         'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons'
+                        'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons',
+                        'textcolor', 'colorpicker', 'fontsize' // Add these plugins
                       ],
-                      toolbar: 'undo redo | blocks | ' +
-                        'bold italic forecolor | alignleft aligncenter ' +
+                      toolbar: 'undo redo | blocks fontsize | ' +
+                        'bold italic forecolor backcolor | alignleft aligncenter ' +
                         'alignright alignjustify | bullist numlist outdent indent | ' +
                         'removeformat | image media link | emoticons | help',
                       content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; font-size: 14px; line-height: 1.6; }',
-                      
+
                       // Image upload configuration
                       images_upload_handler: handleImageUpload,
                       automatic_uploads: true,
                       images_upload_base_path: '/images/',
                       paste_data_images: true,
-                      
+
                       // Additional formatting options
                       block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6;',
-                      
+
+                      fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 20pt 24pt 28pt 32pt 36pt 48pt 72pt',
+
+                      color_map: [
+                        "000000", "Black",
+                        "993300", "Burnt orange",
+                        "333300", "Dark olive",
+                        "003300", "Dark green",
+                        "003366", "Dark azure",
+                        "000080", "Navy Blue",
+                        "333399", "Indigo",
+                        "333333", "Very dark gray",
+                        "800000", "Maroon",
+                        "FF6600", "Orange",
+                        "808000", "Olive",
+                        "008000", "Green",
+                        "008080", "Teal",
+                        "0000FF", "Blue",
+                        "666699", "Grayish blue",
+                        "808080", "Gray"
+                      ],
+
                       // Link configuration
                       link_default_target: '_blank',
                       link_assume_external_targets: true,
-                      
+
                       // Table configuration
                       table_default_attributes: {
                         border: '1'
@@ -856,20 +878,20 @@ const CreateArticle = () => {
                         'border-collapse': 'collapse',
                         'width': '100%'
                       },
-                      
+
                       // Responsive image handling
                       image_advtab: true,
                       image_caption: true,
                       image_title: true,
-                      
+
                       // Content filtering
                       valid_elements: '*[*]',
                       extended_valid_elements: 'script[src|async|defer|type|charset]',
-                      
+
                       // Skin and theme
                       skin: 'oxide',
                       content_css: 'default',
-                      
+
                       // Mobile responsive
                       mobile: {
                         menubar: false,
